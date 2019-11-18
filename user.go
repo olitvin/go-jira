@@ -180,6 +180,23 @@ func WithInactive(inactive bool) userSearchF {
 	}
 }
 
+// WithAddParam sets the inactive users lookup
+func WithAddParam(name string, value string) userSearchF {
+	return func(s userSearch) userSearch {
+		s = append(s, userSearchParam{name: name, value: value})
+		return s
+	}
+}
+
+// WithSetParam sets the inactive users lookup
+func WithSetParam(name string, value string) userSearchF {
+	return func(s userSearch) userSearch {
+		return []userSearchParam{
+			userSearchParam{name: name, value: value},
+		}
+	}
+}
+
 // Find searches for user info from JIRA:
 // It can find users by email, username or name
 //
